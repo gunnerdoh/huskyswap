@@ -1,13 +1,31 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+#title-img {
+  max-width: 100px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#button-addon2, #items-header {
+  background-color: #8205ff;
+}
+
+#magnifying-glass {
+  width: 20px;
+  height: 20px;
+  margin-bottom: 2px;
+}
+
+.header-buttons {
+  white-space: nowrap;
+}
+
+#search-bar {
+  max-width: 600px;
+}
+
+#cover-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+#items-header button, #sell-btn {
+  font-weight: bold;
 }
