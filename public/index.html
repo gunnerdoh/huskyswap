@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Depop Clone</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <header>
+        <div class="d-flex justify-content-between align-items-center py-2 px-4 border border-secondary-subtle bg-light border border-bottom border-black">
+            <img src="icons/logo.svg" alt="HuskySwap" id="title-img" class="me-3">
+            <div class="input-group mx-5" id="search-bar">
+                <input type="text" class="form-control border border-black" placeholder="Find something!" aria-label="Search input" aria-describedby="button-addon2">
+                <button type="button" id="button-addon2" class="btn btn-outline-secondary d-flex align-items-center border border-black">
+                    <img src="icons/search-icon.svg" alt="Search" id="magnifying-glass">
+                </button>
+            </div>
+            <div class="d-flex align-items-center header-buttons">
+                <button type="button" class="btn btn-primary mx-3" id="sell-btn">Sell Now</button>
+                <button type="button" class="btn btn-light mx-2"><img src="icons/mail-icon.svg" alt="Mail"></button>
+                <button type="button" class="btn btn-light mx-2"><img src="icons/cart-icon.svg" alt="Cart"></button>
+                <button type="button" class="btn btn-light mx-2"><img src="icons/profile-icon.svg" alt="Profile"></button>
+                </div>
+        </div>
+        <div id="items-header" class="d-flex flex-wrap justify-content-start gap-2 py-1 border border-bottom border-black">
+            <button type="button" class="btn btn-sm btn-light mx-3 my-2 border border-black">Men's Clothing</button>
+            <button type="button" class="btn btn-sm btn-light mx-3 my-2 border border-black">Women's Clothing</button>
+            <button type="button" class="btn btn-sm btn-light mx-3 my-2 border border-black">House/Dorm Stuff</button>
+            <button type="button" class="btn btn-sm btn-light mx-3 my-2 border border-black px-5">Tech</button>
+            <button type="button" class="btn btn-sm btn-light mx-3 my-2 border border-black px-5">Shoes</button>
+            <button type="button" class="btn btn-sm btn-light mx-3 my-2 border border-black px-5">Misc.</button>
+        </div>
+    </header>
+    <main>
+        <div>
+            <img src="icons/cover.png" id="cover-img" alt="Go Huskies">
+        </div>
+        <div id="listings-grid" class="mx-5">
+            <div class="card m-3" style="width: 18rem;">
+                <img src="images/nonexistent.jpg" class="card-img-top listing-img" alt="Item Image">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">An item</li>
+                    <li class="list-group-item">A second item</li>
+                    <li class="list-group-item">A third item</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>

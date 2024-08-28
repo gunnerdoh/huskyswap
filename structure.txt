@@ -1,0 +1,4 @@
+header: logo, search bar
+if logged in: sell button, messages, cart, my account
+
+my account button dropdown
