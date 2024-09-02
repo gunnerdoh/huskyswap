@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const HeaderButtons = () => {
   return (
@@ -6,7 +7,9 @@ const HeaderButtons = () => {
       <button type="button" className="btn btn-primary mx-3" id="sell-btn">Sell Now</button>
       <button type="button" className="btn btn-light mx-2"><img src="/icons/mail-icon.svg" alt="Mail" /></button>
       <button type="button" className="btn btn-light mx-2"><img src="/icons/cart-icon.svg" alt="Cart" /></button>
-      <button type="button" className="btn btn-light mx-2"><img src="/icons/profile-icon.svg" alt="Profile" /></button>
+      <Link to="/login"> {/* Ensure the path matches the route in App.js */}
+        <button type="button" className="btn btn-light mx-2"><img src="/icons/profile-icon.svg" alt="Profile" /></button>
+      </Link>
     </div>
   );
 };

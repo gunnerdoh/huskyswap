@@ -5,7 +5,6 @@ const CategoryButtons = () => {
     "Men's Clothing", "Women's Clothing", "House/Dorm Stuff",
     "Tech", "Shoes", "Misc."
   ];
-  console.log("made");
 
   return (
     <div id="items-header" className="d-flex flex-wrap justify-content-start gap-2 py-1 border border-bottom border-black">

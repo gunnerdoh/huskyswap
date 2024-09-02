@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ListingCard from './ListingCard';
 import Header from './Header';
+import Login from './LoginPage';
+import Register from './RegisterPage';
 
 const App = () => {
-
   const [listings] = useState([
     {
       title: "Card title",
@@ -16,25 +18,32 @@ const App = () => {
     console.log("App component mounted");
   }, []);
 
-  console.log("Before return in App");
-
   return (
     <div>
-      <Header />
       <main>
-        <div>
-          <img src="../icons/cover.png"></img>
-          <img src="icons/cover.png" id="cover-img" alt=""/>
-        </div>
-        <div id="listings-grid" className="mx-5">
-          {listings.map((listing, index) => (
-            <ListingCard key={index} {...listing} />
-          ))}
-        </div>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <div>
+                <Header />
+                <div>
+                  <img src='/icons/cover.svg' id="cover-img" alt="Cover Image" />
+                </div>
+                <div id="listings-grid" className="mx-5">
+                  {listings.map((listing, index) => (
+                    <ListingCard key={index} {...listing} />
+                  ))}
+                </div>
+              </div>
+            }
+          />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
       </main>
-    </div>
+      </div>
   );
-
 };
 
 export default App;
