@@ -21,6 +21,10 @@ function Login() {
     }
   };
 
+  const handleRegisterNav = () => {
+    navigate('/register');
+  }
+
   return (
     <div style={styles.container}>
       <h2>Login</h2>
@@ -44,6 +48,9 @@ function Login() {
         {error && <p style={styles.error}>{error}</p>}
         <button type="submit" style={styles.button}>Login</button>
       </form>
+      <button onClick={handleRegisterNav} style={styles}>
+        Sign Up
+      </button>
     </div>
   );
 }

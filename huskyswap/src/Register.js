@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth, signInWithGoogle } from './firebaseConfig';
+import { auth, signInWithGoogle } from './firebaseConfig'; // Import signInWithGoogle
 import { useNavigate } from 'react-router-dom';
 
 function Register() {
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -29,7 +30,7 @@ function Register() {
 
   const handleGoogleSignIn = async () => {
     try {
-      await signInWithGoogle();
+      await signInWithGoogle(); // Use the imported signInWithGoogle function
       navigate('/dashboard');
     } catch (err) {
       setError('Failed to sign in with Google. ' + err.message);
@@ -40,6 +41,14 @@ function Register() {
     <div style={styles.container}>
       <h2>Register</h2>
       <form onSubmit={handleRegister} style={styles.form}>
+        <input
+          type="username"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          style={styles.input}
+          required
+        />
         <input
           type="email"
           placeholder="Email"
