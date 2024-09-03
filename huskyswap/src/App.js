@@ -9,13 +9,6 @@ import Dashboard from './Dashboard';
 
 const App = () => {
   const [user, setUser] = useState(null);
-  const [listings, setListings] = useState([]);
-  const [newListing, setNewListing] = useState({
-    title: '',
-    images: [],
-    description: '',
-    price: 0,
-  });
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
