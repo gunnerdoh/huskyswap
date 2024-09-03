@@ -9,16 +9,19 @@ const HeaderButtons = ({ user }) => {
       <button type="button" className="btn btn-light mx-2"><img src="/icons/cart-icon.svg" alt="Cart" /></button>
       {user ? (
         <Link to="/profile">
-          <button type="button" className="btn btn-light mx-2">
-            <img src="/icons/profile-icon.svg" alt="Profile" />
+          <button type="button" className="btn btn-light d-flex align-items-center mx-2">
+            <img src={'/icons/profile-icon.svg'} alt="Profile" className="me-2" />
+            <p className="mb-0">Profile</p>
           </button>
         </Link>
       ) : (
-        <Link to="/login"> {/* Ensure the path matches the route in App.js */}
-          <button type="button" className="btn btn-light mx-2"><img src="/icons/profile-icon.svg" alt="Profile" /></button>
+        <Link to="/login">
+          <button type="button" className="btn btn-light d-flex align-items-center mx-2">
+            <img src={'/icons/profile-icon.svg'} alt="Profile" className="me-2" />
+            <p className="mb-0">Log In</p>
+          </button>
         </Link>
       )}
-
     </div>
   );
 };
