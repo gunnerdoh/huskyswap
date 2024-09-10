@@ -1,35 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from './firebaseConfig';
-import Login from './LoginPage';
-import Register from './Register';
-import Profile from './Profile';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import Dashboard from './Dashboard';
+import LoginPage from './LoginPage';
+import Register from './Register';
+import Profile from './ProfileNew';
+import UploadForm from './UploadForm';
+import ListingDetail from './ListingDetail';
 
-const App = () => {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user ? user : null);
-    });
-    return () => unsubscribe();
-  }, []);
-
+function App() {
   return (
-    <div>
-      <main>
-        <Routes>
-          <Route path="/" element={<Dashboard user={user} />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<Profile user={user} />} />
-          <Route path="/dashboard" element={<Dashboard user={user} />} />
-        </Routes>
-      </main>
-    </div>
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/upload" element={<UploadForm />} />
+        <Route path="/listing/:id" element={<ListingDetail />} />
+      </Routes>
   );
-};
+}
 
 export default App;

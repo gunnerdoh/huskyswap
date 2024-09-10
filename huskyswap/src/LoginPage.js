@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from './firebaseConfig';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
+import { useAuth } from './AuthContext';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { user } = useAuth();
+
+  if (user) {
+    return <Navigate to="/dashboard" />;
+  }
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -25,16 +31,20 @@ function Login() {
     navigate('/register');
   }
 
+  const handleBack = () => {
+    navigate('/dashboard');
+  }
+
   return (
-    <div style={styles.container}>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin} style={styles.form}>
+    <div className="container-fluid d-flex flex-column align-items-center justify-content-center min-vh-100 bg-light">
+      <h2 className="mb-4">Login</h2>
+      <form onSubmit={handleLogin} className="d-flex flex-column" style={{ width: '300px' }}>
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          style={styles.input}
+          className="form-control mb-2"
           required
         />
         <input
@@ -42,50 +52,21 @@ function Login() {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          style={styles.input}
+          className="form-control mb-2"
           required
         />
-        {error && <p style={styles.error}>{error}</p>}
-        <button type="submit" style={styles.button}>Login</button>
+        {error && <p className="text-danger mb-2">{error}</p>}
+        <button type="submit" className="btn btn-primary mb-2">Login</button>
       </form>
-      <button onClick={handleRegisterNav} style={styles}>
-        Sign Up
+      <p></p>
+      <button onClick={handleRegisterNav} className="btn btn-success mb-2">
+        Not a member? Sign Up Here
+      </button>
+      <button onClick={handleBack} className="btn btn-secondary">
+        Back to Dashboard
       </button>
     </div>
   );
 }
-
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100vh',
-    backgroundColor: '#f5f5f5',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '300px',
-  },
-  input: {
-    padding: '10px',
-    margin: '10px 0',
-    fontSize: '16px',
-  },
-  button: {
-    padding: '10px',
-    backgroundColor: '#007bff',
-    color: '#fff',
-    border: 'none',
-    fontSize: '16px',
-    cursor: 'pointer',
-  },
-  error: {
-    color: 'red',
-    margin: '10px 0',
-  },
-};
 
 export default Login;

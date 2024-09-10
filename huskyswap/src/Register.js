@@ -1,52 +1,89 @@
 import React, { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth, signInWithGoogle } from './firebaseConfig'; // Import signInWithGoogle
+import { doc, setDoc } from 'firebase/firestore';
+import { db } from './firebaseConfig';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext';
 
 function Register() {
-  const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { signup } = useAuth();
+
+  const validate = () => {
+    if (!name.trim() || !email.trim() || !password.trim()) {
+      setError('All fields are required.');
+      return false;
+    }
+    if (!email.includes('@') || !email.includes('.')) {
+      setError('Please enter a valid email address.');
+      return false;
+    }
+    return true;
+  };
+
+  const insertUserRecord = async (id) => {
+    const newUser = {
+      id: id,
+      name: name,
+      email: email,
+      joined: Date.now()
+    };
+
+    try {
+      console.log('Attempting to insert user record:', newUser);
+      await setDoc(doc(db, 'users', id), newUser);
+      console.log('User record inserted successfully');
+    } catch (error) {
+      console.error('Error inserting user record:', error);
+      console.error('Error code:', error.code);
+      console.error('Error message:', error.message);
+      throw error;
+    }
+  };
+
+  const handleToLogin = () => {
+    navigate('/login');
+  }
+
+  const handleToDashboard = () => {
+    navigate('/dashboard');
+  }
 
   const handleRegister = async (e) => {
     e.preventDefault();
     setError('');
 
-    if (password !== confirmPassword) {
-      setError('Passwords do not match.');
+    if (!validate()) {
       return;
     }
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      navigate('/dashboard');
-    } catch (err) {
-      setError('Failed to register. ' + err.message);
-    }
-  };
+      console.log('Attempting to create user with email:', email);
+      const userCredential = await signup(email, password);
+      console.log('User created successfully:', userCredential.user);
+      const userId = userCredential.user.uid;
 
-  const handleGoogleSignIn = async () => {
-    try {
-      await signInWithGoogle(); // Use the imported signInWithGoogle function
-      navigate('/dashboard');
+      await insertUserRecord(userId);
+      navigate('/profile');
     } catch (err) {
-      setError('Failed to sign in with Google. ' + err.message);
+      console.error('Registration error:', err);
+      setError('Failed to register: ' + err.message);
     }
   };
 
   return (
-    <div style={styles.container}>
-      <h2>Register</h2>
-      <form onSubmit={handleRegister} style={styles.form}>
+    <div className="container-fluid d-flex flex-column align-items-center justify-content-center min-vh-100 bg-light">
+      <h2 className="mb-4">Register</h2>
+      <form onSubmit={handleRegister} className="d-flex flex-column" style={{ width: '300px' }}>
         <input
-          type="username"
+          type="text"
           placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          style={styles.input}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="form-control mb-2"
           required
         />
         <input
@@ -54,7 +91,7 @@ function Register() {
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          style={styles.input}
+          className="form-control mb-2"
           required
         />
         <input
@@ -62,68 +99,25 @@ function Register() {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          style={styles.input}
+          className="form-control mb-2"
           required
         />
-        <input
-          type="password"
-          placeholder="Confirm Password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          style={styles.input}
-          required
-        />
-        {error && <p style={styles.error}>{error}</p>}
-        <button type="submit" style={styles.button}>Register</button>
+        <button type="submit" className="btn btn-primary my-1">
+          Register
+        </button>
+        {error && <p className="text-danger mb-2">{error}</p>}
       </form>
-      <button onClick={handleGoogleSignIn} style={styles.googleButton}>
-        Sign up with Google
-      </button>
+      <div className='my-3 d-flex flex-column align-center'>
+        <button onClick={handleToLogin} className="btn btn-secondary my-1">
+            Back to Login
+          </button>
+          <button onClick={handleToDashboard}  className="btn btn-dark my-1">
+            Back to Dashboard
+          </button>
+      </div>
+
     </div>
   );
 }
-
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100vh',
-    backgroundColor: '#f5f5f5',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '300px',
-  },
-  input: {
-    padding: '10px',
-    margin: '10px 0',
-    fontSize: '16px',
-  },
-  button: {
-    padding: '10px',
-    backgroundColor: '#007bff',
-    color: '#fff',
-    border: 'none',
-    fontSize: '16px',
-    cursor: 'pointer',
-    marginBottom: '10px',
-  },
-  googleButton: {
-    padding: '10px',
-    backgroundColor: '#db4437',
-    color: '#fff',
-    border: 'none',
-    fontSize: '16px',
-    cursor: 'pointer',
-    width: '300px',
-  },
-  error: {
-    color: 'red',
-    margin: '10px 0',
-  },
-};
 
 export default Register;

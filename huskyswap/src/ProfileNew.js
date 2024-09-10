@@ -1,16 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth } from './firebaseConfig';
+import { db } from './firebaseConfig';
+import { doc, getDoc, updateDoc, collection, query, where, getDocs } from 'firebase/firestore';
+import { useAuth } from './AuthContext';
 import Header from './Header';
+import ListingCard from './ListingCard';
 
 const Profile = () => {
-  const user = auth.currentUser;
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
-  const [newDisplayName, setNewDisplayName] = useState(user?.displayName || '');
+  const [userData, setUserData] = useState(null);
+  const [newDisplayName, setNewDisplayName] = useState('');
+  const [userListings, setUserListings] = useState([]);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (user) {
+        try {
+          console.log('Attempting to fetch user data for UID:', user.uid);
+
+          // Fetch user document
+          const userDocRef = doc(db, 'users', user.uid);
+          const userDoc = await getDoc(userDocRef);
+          if (userDoc.exists()) {
+            console.log('User document found:', userDoc.data());
+            setUserData(userDoc.data());
+            setNewDisplayName(userDoc.data().name || '');
+          } else {
+            console.log('No user document found for UID:', user.uid);
+          }
+
+          // Fetch user's listings
+          const listingsRef = collection(db, 'listings');
+          const q = query(listingsRef, where("userId", "==", user.uid));
+          const querySnapshot = await getDocs(q);
+          const listings = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+          setUserListings(listings);
+
+        } catch (error) {
+          console.error('Error fetching data:', error);
+          if (error.code === 'permission-denied') {
+            console.error('Permission denied. Check Firestore security rules.');
+          }
+        }
+      } else {
+        console.log('No user is currently logged in');
+        navigate('/login');
+      }
+    };
+
+    fetchUserData();
+  }, [user, navigate]);
 
   const handleLogout = async () => {
     try {
-      await auth.signOut();
+      await logout();
       navigate('/');
     } catch (error) {
       console.error('Failed to log out', error);
@@ -19,8 +63,11 @@ const Profile = () => {
 
   const handleDisplayNameSubmit = async (e) => {
     e.preventDefault();
+    if (!user) return;
     try {
-      await user.updateProfile({ displayName: newDisplayName });
+      const userDocRef = doc(db, 'users', user.uid);
+      await updateDoc(userDocRef, { name: newDisplayName });
+      setUserData({ ...userData, name: newDisplayName });
       alert('Display name updated successfully!');
     } catch (error) {
       console.error('Failed to update display name', error);
@@ -28,47 +75,64 @@ const Profile = () => {
     }
   };
 
+  const formatDate = (timestamp) => {
+    if (!timestamp) return 'N/A';
+    return new Date(timestamp).toLocaleDateString();
+  };
+
+  if (!user) {
+    return <p>Please log in to view your profile.</p>;
+  }
+
   return (
     <div>
-      <Header user={user} />
+      <Header />
       <div style={styles.container}>
-        {user ? (
+        {userData ? (
           <>
             <div style={styles.profileSection}>
               <h2 style={styles.sectionTitle}>Your Profile</h2>
               <div style={styles.profileInfo}>
-                <p><strong>Email:</strong> {user.email}</p>
-                <p><strong>Display Name:</strong> {user.displayName || "N/A"}</p>
+                <p><strong>Username:</strong> {userData.name || 'N/A'}</p>
+                <p><strong>Email:</strong> {userData.email}</p>
+                <p><strong>Date Joined:</strong> {formatDate(userData.joined)}</p>
                 <form onSubmit={handleDisplayNameSubmit} style={styles.form}>
-                  <label htmlFor="displayName" style={styles.label}>Change Display Name:</label>
+                  <label htmlFor="displayName" style={styles.label}>Change Username:</label>
                   <input
                     type="text"
                     id="displayName"
                     value={newDisplayName}
                     onChange={(e) => setNewDisplayName(e.target.value)}
                     style={styles.input}
-                    placeholder="Enter new display name"
+                    placeholder="Enter new username"
                   />
-                  <button type="submit" style={styles.updateButton}>Update Display Name</button>
+                  <button type="submit" style={styles.updateButton}>Update Username</button>
                 </form>
                 <button onClick={handleLogout} style={styles.logoutButton}>Log Out</button>
               </div>
             </div>
+
             <div style={styles.listingsSection}>
               <h2 style={styles.sectionTitle}>My Listings</h2>
               <div style={styles.listingsContainer}>
-                {/* Placeholder for listing cards */}
-                <p style={styles.placeholderText}>Your listing cards will be displayed here.</p>
+                {userListings.length > 0 ? (
+                  userListings.map(listing => (
+                    <ListingCard key={listing.id} listing={listing} />
+                  ))
+                ) : (
+                  <p style={styles.placeholderText}>You haven't posted any listings yet.</p>
+                )}
               </div>
             </div>
           </>
         ) : (
-          <p>No user is logged in.</p>
+          <p>Loading user data...</p>
         )}
       </div>
     </div>
   );
 };
+
 
 const styles = {
   container: {
