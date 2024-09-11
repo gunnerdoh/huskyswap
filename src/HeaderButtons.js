@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const HeaderButtons = ({ user }) => {
-
   if (user) {
     console.log("Loggedin!!lkflklkfslkdflkflk!");
   }
@@ -17,7 +16,11 @@ const HeaderButtons = ({ user }) => {
           <button type="button" className="btn btn-primary mx-3" id="sell-btn">Sell Now</button>
         </Link>
       )}
-      <button type="button" className="btn btn-light mx-2"><img src="/icons/mail-icon.svg" alt="Mail" /></button>
+      <Link to="/messages">  {/* Add this Link */}
+        <button type="button" className="btn btn-light mx-2">
+          <img src="/icons/mail-icon.svg" alt="Messages" />
+        </button>
+      </Link>
       <button type="button" className="btn btn-light mx-2"><img src="/icons/cart-icon.svg" alt="Cart" /></button>
       {user ? (
         <Link to="/profile">

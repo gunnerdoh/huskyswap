@@ -126,7 +126,10 @@ const Profile = () => {
             </div>
           </>
         ) : (
-          <p>Loading user data...</p>
+          <>
+            <p>Loading user data...</p>
+            <button onClick={handleLogout}>Problem? Try Logging Out</button>
+          </>
         )}
       </div>
     </div>
