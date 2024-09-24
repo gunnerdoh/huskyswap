@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { db } from '../utils/firebaseConfig';
 import { collection, getDocs } from 'firebase/firestore';
 import { useAuth } from '../contexts/AuthContext';
-import Header from './Header';
+import Header from '../components/Header';
 import ListingCard from '../components/ListingCard';
 
 const Dashboard = () => {
@@ -26,7 +26,7 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="mx-0 px-0">
+    <div className="mx-0 px-0 DashboardPage">
       <Header />
       <div className="container-fluid px-0">
         <img

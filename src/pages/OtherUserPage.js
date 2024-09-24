@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { db } from '../utils/firebaseConfig';
 import { doc, getDoc, collection, query, where, getDocs, setDoc } from 'firebase/firestore';
-import Header from './Header';
+import Header from '../components/Header';
 import { useAuth } from '../contexts/AuthContext';
 
-const UserProfile = () => {
+const OtherUserPage = () => {
   const { userId } = useParams();
   const [user, setUser] = useState(null);
   const [userListings, setUserListings] = useState([]);
@@ -111,4 +111,4 @@ const styles = {
   },
 };
 
-export default UserProfile;
+export default OtherUserPage;

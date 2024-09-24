@@ -64,7 +64,7 @@ const Conversation = () => {
   };
 
   return (
-    <div className="d-flex flex-column h-100">
+    <div className="Conversation d-flex flex-column h-100">
       <div className="d-flex justify-content-between align-items-center mb-3">
         <button className="btn btn-outline-primary" onClick={() => navigate('/dashboard')}>
           Back to Dashboard

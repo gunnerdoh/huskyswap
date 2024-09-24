@@ -1,14 +1,14 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import MessagesList from '../components/MessagesList';
+import MessagesList from '../components/ConversationsList';
 import Conversation from '../components/Conversation';
-import Header from './Header';
+import Header from '../components/Header';
 
-const MessagesPage = () => {
+const ConversationsPage = () => {
   const { conversationId } = useParams();
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid p-0 ConversationsPage">
           <Header />
       <h1 className="mb-4">Messages</h1>
       <div className="row">
@@ -35,4 +35,4 @@ const MessagesPage = () => {
   );
 };
 
-export default MessagesPage;
+export default ConversationsPage;

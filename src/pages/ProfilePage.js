@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { db } from '../utils/firebaseConfig';
 import { doc, getDoc, updateDoc, collection, query, where, getDocs } from 'firebase/firestore';
 import { useAuth } from '../contexts/AuthContext';
-import Header from './Header';
+import Header from '../components/Header';
 import ListingCard from '../components/ListingCard';
 
 const Profile = () => {

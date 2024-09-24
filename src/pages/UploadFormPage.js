@@ -4,7 +4,7 @@ import { db, storage } from '../utils/firebaseConfig';
 import { collection, addDoc, serverTimestamp, doc, getDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useAuth } from '../contexts/AuthContext';
-import Header from '../pages/Header';
+import Header from '../components/Header';
 
 const UploadForm = () => {
   const [title, setTitle] = useState('');

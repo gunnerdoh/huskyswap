@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { db } from '../utils/firebaseConfig';
-import { collection, query, where, onSnapshot } from 'firebase/firestore';
+import { collection, query, where, onSnapshot, doc, getDoc } from 'firebase/firestore';
 import { useAuth } from '../contexts/AuthContext';
 
-const MessagesList = () => {
+const ConversationList = () => {
   const [conversations, setConversations] = useState([]);
   const { user } = useAuth();
 
@@ -17,18 +17,33 @@ const MessagesList = () => {
     );
 
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const conversationsData = querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      setConversations(conversationsData);
+      const fetchConversations = async () => {
+        const conversationsData = await Promise.all(
+          querySnapshot.docs.map(async (document) => {
+            const data = document.data();
+            const otherUserId = data.participants.find(id => id !== user.uid);
+            const otherUserDocRef = doc(db, 'users', otherUserId);
+            const otherUserDoc = await getDoc(otherUserDocRef);
+            const otherUser = otherUserDoc.exists() ? { id: otherUserDoc.id, ...otherUserDoc.data() } : null;
+            
+            return {
+              id: document.id,
+              ...data,
+              otherUser
+            };
+          })
+        );
+        setConversations(conversationsData);
+      };
+
+      fetchConversations();
     });
 
     return () => unsubscribe();
   }, [user]);
 
   return (
-    <div className="container mt-4">
+    <div className="ConversationsList container mt-4">
       <h2 className="mb-4">Your Conversations</h2>
       <div className="list-group">
         {conversations.map(conversation => (
@@ -39,13 +54,12 @@ const MessagesList = () => {
           >
             <div className="d-flex w-100 justify-content-between">
               <h5 className="mb-1">
-                {conversation.participants.find(id => id !== user.uid)}
+                {conversation.otherUser ? conversation.otherUser.name : 'Unknown User'}
               </h5>
-              <small>
-                {new Date(conversation.lastMessage.timestamp).toLocaleString()}
-              </small>
             </div>
-            <p className="mb-1">{conversation.lastMessage.content}</p>
+            <p className="mb-1">
+              {conversation.lastMessage ? conversation.lastMessage.content : 'Start a conversation'}
+            </p>
           </Link>
         ))}
       </div>
@@ -56,4 +70,4 @@ const MessagesList = () => {
   );
 };
 
-export default MessagesList;
+export default ConversationList;

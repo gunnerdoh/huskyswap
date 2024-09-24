@@ -35,7 +35,7 @@ const Message = ({ message, currentUser, otherUser }) => {
   };
 
   return (
-    <div className="d-flex justify-content-between align-items-center mb-2">
+    <div className="Message d-flex justify-content-between align-items-center mb-2">
       <span className="text-muted" style={{width: '20%'}}>{senderName}</span>
       <span className="text-dark" style={{width: '60%'}}>{message.content}</span>
       <span className="text-muted text-end" style={{width: '20%'}}>{formatTime(message.timestamp)}</span>
