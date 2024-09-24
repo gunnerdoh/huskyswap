@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { db } from './firebaseConfig';
+import { db } from '../utils/firebaseConfig';
 import { collection, query, where, onSnapshot } from 'firebase/firestore';
-import { useAuth } from './AuthContext';
+import { useAuth } from '../contexts/AuthContext';
 
 const MessagesList = () => {
   const [conversations, setConversations] = useState([]);

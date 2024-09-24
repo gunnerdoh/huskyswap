@@ -1,13 +1,13 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Dashboard from './Dashboard';
-import LoginPage from './LoginPage';
-import Register from './Register';
-import Profile from './ProfileNew';
-import UploadForm from './UploadForm';
-import ListingDetail from './ListingDetail';
-import UserProfile from './UserProfile';
-import MessagesPage from './MessagesPage';
+import Dashboard from './pages/Dashboard';
+import LoginPage from './pages/LoginPage';
+import Register from './pages/Register';
+import Profile from './pages/ProfileNew';
+import UploadForm from './components/UploadForm';
+import ListingDetail from './pages/ListingDetail';
+import UserProfile from './pages/UserProfile';
+import MessagesPage from './pages/MessagesPage';
 
 function App() {
   return (

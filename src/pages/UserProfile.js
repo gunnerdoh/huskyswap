@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { db } from './firebaseConfig';
+import { db } from '../utils/firebaseConfig';
 import { doc, getDoc, collection, query, where, getDocs, setDoc } from 'firebase/firestore';
 import Header from './Header';
-import { useAuth } from './AuthContext';
+import { useAuth } from '../contexts/AuthContext';
 
 const UserProfile = () => {
   const { userId } = useParams();

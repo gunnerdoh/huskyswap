@@ -6,7 +6,7 @@ import {
   sendPasswordResetEmail,
   updateProfile
 } from 'firebase/auth';
-import { auth, onAuthStateChanged } from './firebaseConfig';
+import { auth, onAuthStateChanged } from '../utils/firebaseConfig';
 
 const AuthContext = createContext();
 

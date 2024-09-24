@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { db } from './firebaseConfig';
+import { db } from '../utils/firebaseConfig';
 import { doc, getDoc, setDoc, collection, query, where, getDocs } from 'firebase/firestore';
 import Header from './Header';
-import { useAuth } from './AuthContext';
+import { useAuth } from '../contexts/AuthContext';
 
 const ListingDetail = () => {
   const { id } = useParams();

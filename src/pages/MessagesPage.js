@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import MessagesList from './MessagesList';
-import Conversation from './Conversation';
+import MessagesList from '../components/MessagesList';
+import Conversation from '../components/Conversation';
 import Header from './Header';
 
 const MessagesPage = () => {

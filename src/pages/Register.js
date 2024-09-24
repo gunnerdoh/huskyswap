@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { doc, setDoc } from 'firebase/firestore';
-import { db } from './firebaseConfig';
+import { db } from '../utils/firebaseConfig';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from './AuthContext';
+import { useAuth } from '../contexts/AuthContext';
 
 function Register() {
   const [name, setName] = useState('');

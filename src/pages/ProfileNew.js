@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { db } from './firebaseConfig';
+import { db } from '../utils/firebaseConfig';
 import { doc, getDoc, updateDoc, collection, query, where, getDocs } from 'firebase/firestore';
-import { useAuth } from './AuthContext';
+import { useAuth } from '../contexts/AuthContext';
 import Header from './Header';
-import ListingCard from './ListingCard';
+import ListingCard from '../components/ListingCard';
 
 const Profile = () => {
   const { user, logout } = useAuth();

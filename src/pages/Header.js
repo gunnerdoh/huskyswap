@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from './AuthContext';
-import SearchBar from './SearchBar';
-import HeaderButtons from './HeaderButtons';
-import CategoryButtons from './CategoryButtons';
+import { useAuth } from '../contexts/AuthContext';
+import SearchBar from '../components/SearchBar';
+import HeaderButtons from '../components/HeaderButtons';
+import CategoryButtons from '../components/CategoryButtons';
 
 const Header = () => {
   const navigate = useNavigate();

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { db, storage } from './firebaseConfig';
+import { db, storage } from '../utils/firebaseConfig';
 import { collection, addDoc, serverTimestamp, doc, getDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { useAuth } from './AuthContext';
-import Header from './Header';
+import { useAuth } from '../contexts/AuthContext';
+import Header from '../pages/Header';
 
 const UploadForm = () => {
   const [title, setTitle] = useState('');
