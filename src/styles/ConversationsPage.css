@@ -1,0 +1,31 @@
+.conversations-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  .conversations-container {
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden;
+  }
+  
+  .conversation-list-container {
+    width: 300px;
+    border-right: 1px solid #cfdae1;
+  }
+  
+  .conversation-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .no-conversation-selected {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background-color: #f8f9fa;
+    color: #6c757d;
+  }

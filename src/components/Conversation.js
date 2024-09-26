@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { useParams } from 'react-router-dom';
 import { db } from '../utils/firebaseConfig';
 import { doc, getDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
 import { useAuth } from '../contexts/AuthContext';
 import Message from './Message';
+import '../styles/Conversation.css';
 
 const Conversation = () => {
   const [messages, setMessages] = useState([]);
@@ -11,7 +12,7 @@ const Conversation = () => {
   const [otherUser, setOtherUser] = useState(null);
   const { conversationId } = useParams();
   const { user } = useAuth();
-  const navigate = useNavigate();
+  const messageListRef = useRef(null);
 
   useEffect(() => {
     const fetchConversation = async () => {
@@ -22,7 +23,7 @@ const Conversation = () => {
           const data = docSnap.data();
           const messagesArray = Object.entries(data.messages || {})
             .map(([id, message]) => ({ id, ...message }))
-            .sort((a, b) => b.timestamp - a.timestamp);
+            .sort((a, b) => a.timestamp - b.timestamp);
           setMessages(messagesArray);
           const otherUserId = data.participants.find(id => id !== user.uid);
           const otherUserDoc = await getDoc(doc(db, 'users', otherUserId));
@@ -39,6 +40,16 @@ const Conversation = () => {
       fetchConversation();
     }
   }, [conversationId, user]);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  const scrollToBottom = () => {
+    if (messageListRef.current) {
+      messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
+    }
+  };
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -64,35 +75,32 @@ const Conversation = () => {
   };
 
   return (
-    <div className="Conversation d-flex flex-column h-100">
-      <div className="d-flex justify-content-between align-items-center mb-3">
-        <button className="btn btn-outline-primary" onClick={() => navigate('/dashboard')}>
-          Back to Dashboard
-        </button>
-        <h2>{otherUser ? `${otherUser.name}'s Conversation` : 'Conversation'}</h2>
-        {otherUser && (
-          <Link to={`/user/${otherUser.id}`} className="btn btn-outline-secondary">
-            View Profile
-          </Link>
-        )}
+    <div className="conversation">
+      <div className="conversation-header">
+        <h2>{otherUser ? `${otherUser.name}` : 'Conversation'}</h2>
       </div>
-      <form onSubmit={sendMessage} className="mb-3">
-        <div className="input-group">
-          <input
-            type="text"
-            className="form-control"
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-            placeholder="Type a message..."
-          />
-          <button type="submit" className="btn btn-primary">Send</button>
-        </div>
-      </form>
-      <div className="flex-grow-1 overflow-auto">
+      
+      <div className="message-list" ref={messageListRef}>
         {messages.map((message) => (
-          <Message key={message.id} message={message} currentUser={user} otherUser={otherUser} />
+          <Message 
+            key={message.id} 
+            message={message} 
+            isCurrentUser={message.senderId === user.uid}
+            currentUser={user} 
+            otherUser={otherUser} 
+          />
         ))}
       </div>
+
+      <form onSubmit={sendMessage} className="message-input">
+        <input
+          type="text"
+          value={newMessage}
+          onChange={(e) => setNewMessage(e.target.value)}
+          placeholder="Type a message..."
+        />
+        <button type="submit">Send</button>
+      </form>
     </div>
   );
 };

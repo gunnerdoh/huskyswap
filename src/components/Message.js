@@ -1,8 +1,10 @@
 import React from 'react';
+import '../styles/Message.css';
 
 const Message = ({ message, currentUser, otherUser }) => {
   const isCurrentUser = message.senderId === currentUser.uid;
   const senderName = isCurrentUser ? 'You' : (otherUser ? otherUser.name : 'Other User');
+  const messageClass = isCurrentUser ? 'message current-user' : 'message other-user';
 
   const formatTime = (timestamp) => {
     if (!timestamp) return '';
@@ -35,10 +37,14 @@ const Message = ({ message, currentUser, otherUser }) => {
   };
 
   return (
-    <div className="Message d-flex justify-content-between align-items-center mb-2">
-      <span className="text-muted" style={{width: '20%'}}>{senderName}</span>
-      <span className="text-dark" style={{width: '60%'}}>{message.content}</span>
-      <span className="text-muted text-end" style={{width: '20%'}}>{formatTime(message.timestamp)}</span>
+    <div className={`${messageClass} mb-2`}>
+      <div className="message-content">
+        <p>{message.content}</p>
+      </div>
+      <div className="message-info">
+        <span className="sender-name pe-2">{senderName} </span>
+        <span className="message-time"> {formatTime(message.timestamp)}</span>
+      </div>
     </div>
   );
 };
