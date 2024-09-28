@@ -4,6 +4,7 @@ import { db } from '../utils/firebaseConfig';
 import { doc, getDoc, setDoc, collection, query, where, getDocs } from 'firebase/firestore';
 import Header from '../components/Header';
 import { useAuth } from '../contexts/AuthContext';
+import '../styles/ListingPage.css';
 
 const ListingDetail = () => {
   const { id } = useParams();
@@ -84,15 +85,19 @@ const ListingDetail = () => {
       <Header />
       <div className='card p1'>
         <img src={listing.imageUrl} alt={listing.title} />
-        <h2>{listing.title}</h2>
-        <p>Price: ${listing.price}</p>
-        <p>Description: {listing.description}</p>
-        <p>Posted by: <Link to={`/user/${listing.userId}`}>{listing.username}</Link></p>
-        {user && user.uid !== listing.userId && (
-          <button onClick={handleSendMessage}>
-            Message Seller
-          </button>
-        )}
+        <div className="card-content">
+          <div>
+            <h2>{listing.title}</h2>
+            <p className="description">{listing.description}</p>
+            <p className="price">Price: ${listing.price}</p>
+            <p>Posted by: <Link to={`/user/${listing.userId}`}>{listing.username}</Link></p>
+          </div>
+          {user && user.uid !== listing.userId && (
+            <button onClick={handleSendMessage}>
+              Message Seller
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
