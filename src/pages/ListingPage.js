@@ -9,6 +9,7 @@ import '../styles/ListingPage.css';
 const ListingDetail = () => {
   const { id } = useParams();
   const [listing, setListing] = useState(null);
+  const [message, setMessage] = useState('');
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -30,7 +31,8 @@ const ListingDetail = () => {
     fetchListing();
   }, [id]);
 
-  const handleSendMessage = async () => {
+  const handleSendMessage = async (e) => {
+    e.preventDefault();
     if (!user) {
       navigate('/login');
       return;
@@ -59,7 +61,7 @@ const ListingDetail = () => {
           participants: [user.uid, listing.userId].sort(),
           messages: {},
           lastMessage: {
-            content: `Hi, I'm interested in your listing: ${listing.title}`,
+            content: {message},
             timestamp: new Date().toISOString(),
             senderId: user.uid
           }
@@ -68,6 +70,18 @@ const ListingDetail = () => {
         await setDoc(newConversationRef, newConversation);
       } else {
         conversationId = querySnapshot.docs[0].id;
+        // Add the new message to the existing conversation
+        const conversationRef = doc(db, 'conversations', conversationId);
+        const conversationDoc = await getDoc(conversationRef);
+        const conversationData = conversationDoc.data();
+        const newMessage = {
+          content: {message},
+          timestamp: new Date().toISOString(),
+          senderId: user.uid
+        };
+        conversationData.messages[Date.now().toString()] = newMessage;
+        conversationData.lastMessage = newMessage;
+        await setDoc(conversationRef, conversationData);
       }
 
       // Navigate to the conversation
@@ -90,12 +104,21 @@ const ListingDetail = () => {
             <h2>{listing.title}</h2>
             <p className="description">{listing.description}</p>
             <p className="price">Price: ${listing.price}</p>
-            <p>Posted by: <Link to={`/user/${listing.userId}`}>{listing.username}</Link></p>
+            <p>Posted by: <Link to={`/profile/${listing.userId}`}>{listing.username}</Link></p>
           </div>
           {user && user.uid !== listing.userId && (
-            <button onClick={handleSendMessage}>
-              Message Seller
-            </button>
+            <form onSubmit={handleSendMessage}>
+              <input
+                type="text"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                placeholder="Message seller"
+                required
+              />
+              <button type="submit">
+                Send Message
+              </button>
+            </form>
           )}
         </div>
       </div>

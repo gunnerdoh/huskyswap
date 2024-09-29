@@ -5,6 +5,7 @@ import { doc, getDoc, updateDoc, collection, query, where, getDocs } from 'fireb
 import { useAuth } from '../contexts/AuthContext';
 import Header from '../components/Header';
 import ListingCard from '../components/ListingCard';
+import ConversationsList from '../components/ConversationsList';
 import '../styles/ProfilePage.css';
 
 const Profile = () => {
@@ -97,18 +98,6 @@ const Profile = () => {
                 <p><strong>Username:</strong> {userData.name || 'N/A'}</p>
                 <p><strong>Email:</strong> {userData.email}</p>
                 <p><strong>Date Joined:</strong> {formatDate(userData.joined)}</p>
-                <form onSubmit={handleDisplayNameSubmit} className="form">
-                  <label htmlFor="displayName" className="label">Change Username:</label>
-                  <input
-                    type="text"
-                    id="displayName"
-                    value={newDisplayName}
-                    onChange={(e) => setNewDisplayName(e.target.value)}
-                    className="input"
-                    placeholder="Enter new username"
-                  />
-                  <button type="submit" className="updateButton">Update Username</button>
-                </form>
                 <button onClick={handleLogout} className="logoutButton">Log Out</button>
               </div>
             </div>
@@ -124,6 +113,9 @@ const Profile = () => {
                   <p className="placeholderText">You haven't posted any listings yet.</p>
                 )}
               </div>
+            </div>
+            <div className="MessagesSection">
+              < ConversationsList />
             </div>
           </>
         ) : (
