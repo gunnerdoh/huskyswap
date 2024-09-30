@@ -4,6 +4,7 @@ import { db } from '../utils/firebaseConfig';
 import { doc, getDoc, collection, query, where, getDocs, setDoc } from 'firebase/firestore';
 import Header from '../components/Header';
 import { useAuth } from '../contexts/AuthContext';
+import '../styles/Universal.css';
 
 const OtherUserPage = () => {
   const { userId } = useParams();

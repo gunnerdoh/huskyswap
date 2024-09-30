@@ -5,6 +5,7 @@ import { collection, getDocs } from 'firebase/firestore';
 import { useAuth } from '../contexts/AuthContext';
 import Header from '../components/Header';
 import ListingCard from '../components/ListingCard';
+import '../styles/DashboardPage.css';
 import '../styles/Universal.css';
 
 
@@ -28,7 +29,7 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="mx-0 px-0 DashboardPage">
+    <div className="mx-0 px-0">
       <Header />
       <div className="container-fluid px-0">
         <img
@@ -48,13 +49,13 @@ const Dashboard = () => {
             </p>
           </div>
         )}
-        <h2 className="text-xl font-semibold my-4 mx-5">
+        <h2 className="text-xl font-semibold mt-4 mx-5">
           Available Listings
         </h2>
-        <div className="d-flex flex-row">
+        <div className="listing-section">
           {listings.length > 0 ? (
             listings.map(listing => (
-            <div className="listing-container">
+            <div className="listing-container mx-2 my-1 p-1">
                 <ListingCard key={listing.id} listing={listing} />
             </div>
             ))

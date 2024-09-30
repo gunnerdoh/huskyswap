@@ -7,6 +7,9 @@
   max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .listing-card {
@@ -95,5 +98,12 @@
   .listing-image {
     width: 100%;
     height: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .listing-card {
+    flex-direction: row;
+    min-width: 100%;
   }
 }

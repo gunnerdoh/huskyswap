@@ -1,0 +1,11 @@
+.listing-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: baseline;
+    flex-wrap: wrap;
+}
+
+.listing-container {
+    max-width: 300px;
+}
