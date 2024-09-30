@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { db } from '../utils/firebaseConfig';
-import { doc, getDoc, setDoc, collection, query, where, getDocs } from 'firebase/firestore';
+import { doc, getDoc, setDoc, collection, query, where, getDocs, serverTimestamp} from 'firebase/firestore';
 import Header from '../components/Header';
 import { useAuth } from '../contexts/AuthContext';
 import '../styles/ListingPage.css';
@@ -61,9 +61,9 @@ const ListingDetail = () => {
           participants: [user.uid, listing.userId].sort(),
           messages: {},
           lastMessage: {
-            content: {message},
-            timestamp: new Date().toISOString(),
-            senderId: user.uid
+            content: `${listing.title}. ${message}`,
+            senderId: user.uid,
+            timestamp: new Date().toISOString()
           }
         };
         newConversation.messages[Date.now().toString()] = newConversation.lastMessage;
@@ -75,8 +75,8 @@ const ListingDetail = () => {
         const conversationDoc = await getDoc(conversationRef);
         const conversationData = conversationDoc.data();
         const newMessage = {
-          content: {message},
-          timestamp: new Date().toISOString(),
+          content: `Hi, I'm interested in your listing: ${listing.title}. ${message}`,
+          timestamp: serverTimestamp(),
           senderId: user.uid
         };
         conversationData.messages[Date.now().toString()] = newMessage;
@@ -104,22 +104,28 @@ const ListingDetail = () => {
             <h2>{listing.title}</h2>
             <p className="description">{listing.description}</p>
             <p className="price">Price: ${listing.price}</p>
-            <p>Posted by: <Link to={`/profile/${listing.userId}`}>{listing.username}</Link></p>
+            {user && (
+              user.uid === listing.userId ? (
+                <p>Posted by: <Link to={`/profile/`}>you!</Link></p>
+              ) : (
+                <div>
+                  <p>Posted by: <Link to={`/profile/${listing.userId}`}>{listing.username}</Link></p>
+                  <form onSubmit={handleSendMessage}>
+                    <input
+                      type="text"
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      placeholder="Message seller"
+                      required
+                    />
+                    <button type="submit">
+                      Send Message
+                    </button>
+                  </form>
+                </div>
+              )
+            )}
           </div>
-          {user && user.uid !== listing.userId && (
-            <form onSubmit={handleSendMessage}>
-              <input
-                type="text"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="Message seller"
-                required
-              />
-              <button type="submit">
-                Send Message
-              </button>
-            </form>
-          )}
         </div>
       </div>
     </div>

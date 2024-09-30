@@ -4,6 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 import SearchBar from './SearchBar';
 import HeaderButtons from './HeaderButtons';
 import CategoryButtons from './CategoryButtons';
+import WhyButton from './WhyButton';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const Header = () => {
         <SearchBar />
         <HeaderButtons user={user} />
       </div>
-      <CategoryButtons />
+      <WhyButton />
     </header>
   );
 };

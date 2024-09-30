@@ -21,7 +21,6 @@ const HeaderButtons = ({ user }) => {
           <img src="/icons/mail-icon.svg" alt="Messages" />
         </button>
       </Link>
-      <button type="button" className="btn btn-light mx-2"><img src="/icons/cart-icon.svg" alt="Cart" /></button>
       {user ? (
         <Link to="/profile">
           <button type="button" className="btn btn-light d-flex align-items-center mx-2">

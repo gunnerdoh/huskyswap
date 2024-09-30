@@ -57,9 +57,6 @@ const ConversationList = () => {
                 {conversation.otherUser ? conversation.otherUser.name : 'Unknown User'}
               </h5>
             </div>
-            <p className="mb-1">
-              {conversation.lastMessage ? conversation.lastMessage.content : 'Start a conversation'}
-            </p>
           </Link>
         ))}
       </div>

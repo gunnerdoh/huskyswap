@@ -8,11 +8,13 @@ import UploadForm from './pages/UploadFormPage';
 import ListingDetail from './pages/ListingPage';
 import UserProfile from './pages/OtherUserPage';
 import ConversationsPage from './pages/ConversationsPage';
+import AboutPage from './pages/AboutPage';
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Dashboard />} />
+      <Route path="/about" element={<AboutPage />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<Register />} />

@@ -63,10 +63,16 @@ const Conversation = () => {
 
     try {
       const conversationRef = doc(db, 'conversations', conversationId);
+      const messageId = Date.now().toString();
       await updateDoc(conversationRef, {
-        [`messages.${Date.now()}`]: messageData,
-        lastMessage: messageData
+        [`messages.${messageId}`]: messageData,
       });
+
+      // Update local state with the new message
+      setMessages(prevMessages => [
+        ...prevMessages,
+        { id: messageId, ...messageData, timestamp: new Date() }
+      ]);
 
       setNewMessage('');
     } catch (error) {
