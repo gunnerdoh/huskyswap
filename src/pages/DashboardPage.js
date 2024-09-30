@@ -5,6 +5,8 @@ import { collection, getDocs } from 'firebase/firestore';
 import { useAuth } from '../contexts/AuthContext';
 import Header from '../components/Header';
 import ListingCard from '../components/ListingCard';
+import '../styles/Universal.css';
+
 
 const Dashboard = () => {
   const [listings, setListings] = useState([]);
@@ -38,16 +40,23 @@ const Dashboard = () => {
       <div className='px-2 mx-6'>
         {!user && (
           <div className="bg-blue-100 rounded p-4 my-4">
-            <p>You're viewing the public dashboard. <Link to="/login" className="text-blue-600 hover:underline">Log in</Link> or <Link to="/register" className="text-blue-600 hover:underline">register</Link> to access your personal dashboard and post listings.</p>
+            <p>
+              You're viewing the public dashboard. 
+              <Link to="/login" className="text-blue-600 hover:underline">Log in</Link> or 
+              <Link to="/register" className="text-blue-600 hover:underline">register</Link> 
+              to access your personal dashboard and post listings.
+            </p>
           </div>
         )}
         <h2 className="text-xl font-semibold my-4 mx-5">
-          {user ? 'Your Listings' : 'Recent Listings'}
+          Available Listings
         </h2>
         <div className="d-flex flex-row">
           {listings.length > 0 ? (
             listings.map(listing => (
-              <ListingCard key={listing.id} listing={listing} />
+            <div className="listing-container">
+                <ListingCard key={listing.id} listing={listing} />
+            </div>
             ))
           ) : (
             <p className="w-full text-center">No listings available at the moment.</p>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../styles/ListingCard.css';
 
 const ListingCard = ({ listing }) => {
   const navigate = useNavigate();
@@ -9,16 +10,17 @@ const ListingCard = ({ listing }) => {
   };
 
   return (
-    <div onClick={handleClick} className="card m-4" style={{width: '18rem'}}>
+    <div onClick={handleClick} className="listing-card">
+      <div className="listing-image-container">
         <img
           src={listing.imageUrl}
           alt={listing.title}
-          className="card-img-top"
-          style={{width: '18rem', height: '16rem'}}
+          className="listing-image"
         />
-      <div className="card-body">
-        <h5 className="card-title">${listing.price}</h5>
-        <p className="card-text">{listing.title}</p>
+      </div>
+      <div className="listing-details">
+        <h5 className="listing-price">${listing.price}</h5>
+        <p className="listing-title">{listing.title}</p>
       </div>
     </div>
   );

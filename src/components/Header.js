@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import SearchBar from './SearchBar';
 import HeaderButtons from './HeaderButtons';
-import CategoryButtons from './CategoryButtons';
 import WhyButton from './WhyButton';
+import MobileMenu from './MobileMenu';
+import '../styles/Header.css';
+
 
 const Header = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleToDashboard = () => {
     navigate('/dashboard');
+  };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   return (
@@ -23,10 +30,21 @@ const Header = () => {
         >
           HuskySwap
         </button>
+        <div className="d-none d-md-block">
+          <SearchBar />
+        </div>
+        <div className="d-none d-md-block">
+          <HeaderButtons user={user} />
+        </div>
+        <button className="d-md-none btn btn-light" onClick={toggleMobileMenu}>
+          <img src="/icons/menu-icon.svg" alt="Menu" />
+        </button>
+      </div>
+      <div className="d-md-none">
         <SearchBar />
-        <HeaderButtons user={user} />
       </div>
       <WhyButton />
+      {isMobileMenuOpen && <MobileMenu user={user} onClose={toggleMobileMenu} />}
     </header>
   );
 };

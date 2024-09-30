@@ -28,7 +28,10 @@ const About = () => {
         <p>
             With these in mind, I wanted to create a self-sustaining online marketplace exclusively
             for UW Seattle students. It's something that I wanted myself, as an online marketplace 
-            veteran and student without consistent access to a car. Did you buy a self-heating pot 
+            veteran and student without consistent access to a car. 
+        </p>
+        <p>
+            Did you buy a self-heating pot 
             off of Amazon for your freshman dorm that you haven't touched in a year? Do you have 
             chem textbooks that you'll never touch again taking up space in your room? Did your 
             wardrobe revamp leave you a pile of clothes that you're probably not gonna wear out again? 
