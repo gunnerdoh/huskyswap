@@ -5,6 +5,8 @@ import { doc, getDoc, setDoc, collection, query, where, getDocs, serverTimestamp
 import Header from '../components/Header';
 import { useAuth } from '../contexts/AuthContext';
 import '../styles/ListingPage.css';
+import '../styles/Universal.css';
+
 
 const ListingDetail = () => {
   const { id } = useParams();
@@ -94,42 +96,42 @@ const ListingDetail = () => {
 
   if (!listing) return <div>Loading...</div>;
 
-  return (
-    <div>
-      <Header />
-      <div className='card p1'>
-        <img src={listing.imageUrl} alt={listing.title} />
-        <div className="card-content">
-          <div>
-            <h2>{listing.title}</h2>
-            <p className="description">{listing.description}</p>
-            <p className="price">Price: ${listing.price}</p>
-            {user && (
-              user.uid === listing.userId ? (
-                <p>Posted by: <Link to={`/profile/`}>you!</Link></p>
-              ) : (
-                <div>
-                  <p>Posted by: <Link to={`/profile/${listing.userId}`}>{listing.username}</Link></p>
-                  <form onSubmit={handleSendMessage}>
-                    <input
-                      type="text"
-                      value={message}
-                      onChange={(e) => setMessage(e.target.value)}
-                      placeholder="Message seller"
-                      required
-                    />
-                    <button type="submit">
-                      Send Message
-                    </button>
-                  </form>
-                </div>
-              )
-            )}
+    return (
+      <div className="listing-page">
+        <Header />
+        <div className="listing-container">
+          <div className="listing-card">
+            <div className="listing-image">
+              <img src={listing.imageUrl} alt={listing.title} />
+            </div>
+            <div className="listing-details">
+              <h2>{listing.title}</h2>
+              <p className="description">{listing.description}</p>
+              <p className="price">Price: ${listing.price}</p>
+              {user && (
+                user.uid === listing.userId ? (
+                  <p>Posted by: <Link to="/profile">you!</Link></p>
+                ) : (
+                  <div>
+                    <p>Posted by: <Link to={`/profile/${listing.userId}`}>{listing.username}</Link></p>
+                    <form onSubmit={handleSendMessage} className="message-form">
+                      <input
+                        type="text"
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        placeholder="Message seller"
+                        required
+                      />
+                      <button type="submit">Send</button>
+                    </form>
+                  </div>
+                )
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
-};
-
-export default ListingDetail;
+    );
+  };
+  
+  export default ListingDetail;

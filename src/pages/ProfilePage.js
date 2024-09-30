@@ -7,6 +7,8 @@ import Header from '../components/Header';
 import ListingCard from '../components/ListingCard';
 import ConversationsList from '../components/ConversationsList';
 import '../styles/ProfilePage.css';
+import '../styles/Universal.css';
+
 
 const Profile = () => {
   const { user } = useAuth();

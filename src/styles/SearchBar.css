@@ -1,0 +1,11 @@
+.search-container .mt-2 {
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+  }
+  
+  .search-container .mt-2.show {
+    max-height: 50px; /* Adjust as needed */
+    opacity: 1;
+  }

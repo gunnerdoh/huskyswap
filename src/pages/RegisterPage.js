@@ -4,6 +4,9 @@ import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { db, auth } from '../utils/firebaseConfig';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import '../styles/Universal.css';
+
+
 
 function Register() {
   const [error, setError] = useState('');

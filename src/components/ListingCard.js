@@ -10,7 +10,7 @@ const ListingCard = ({ listing }) => {
   };
 
   return (
-    <div onClick={handleClick} className="listing-card">
+    <div onClick={handleClick} className="ListingCard listing-card">
       <div className="listing-image-container">
         <img
           src={listing.imageUrl}

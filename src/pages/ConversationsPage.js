@@ -4,6 +4,8 @@ import ConversationList from '../components/ConversationsList';
 import Conversation from '../components/Conversation';
 import Header from '../components/Header';
 import '../styles/ConversationsPage.css';
+import '../styles/Universal.css';
+
 
 const ConversationsPage = () => {
   const { conversationId } = useParams();

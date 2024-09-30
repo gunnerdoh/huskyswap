@@ -9,6 +9,7 @@
     width: 18rem;
     max-width: 18rem;
     margin: 1rem;
+    flex-direction: row;
   }
   
   .listing-card:hover {
@@ -46,5 +47,3 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  
-  /* Remove media query for responsiveness */

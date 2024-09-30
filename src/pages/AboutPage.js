@@ -33,7 +33,7 @@ const About = () => {
         <p>
             Did you buy a self-heating pot 
             off of Amazon for your freshman dorm that you haven't touched in a year? Do you have 
-            chem textbooks that you'll never touch again taking up space in your room? Did your 
+            chem textbooks that you'll never use again taking up space in your room? Did your 
             wardrobe revamp leave you a pile of clothes that you're probably not gonna wear out again? 
             Don't want to pay ten dollars to ship your twelve dollar t-shirt to a person in Arizona?
         </p>

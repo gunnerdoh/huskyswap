@@ -11,6 +11,7 @@ import ConversationsPage from './pages/ConversationsPage';
 import AboutPage from './pages/AboutPage';
 
 function App() {
+  console.log("app.js executed");
   return (
     <Routes>
       <Route path="/" element={<Dashboard />} />

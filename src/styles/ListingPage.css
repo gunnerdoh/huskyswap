@@ -1,68 +1,99 @@
-.card {
-    display: flex;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-  }
-  
-  .card img {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    padding-left: 1.25rem; /* ps-5 */
-    padding-right: 1rem; /* pe-3 */
-  }
-  
-  .card-content {
-    display: flex;
+.listing-page {
+  background-color: #f0f0f0;
+  min-height: 100vh;
+}
+
+.listing-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.listing-card {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 8px;
+  display: flex;
+  overflow: hidden;
+}
+
+.listing-image {
+  width: 300px;
+  height: 300px;
+  flex-shrink: 0;
+}
+
+.listing-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.listing-details {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.listing-details h2 {
+  margin: 0 0 10px 0;
+  font-size: 24px;
+  color: #333;
+}
+
+.listing-details p {
+  margin: 0 0 8px 0;
+  line-height: 1.4;
+  color: #666;
+}
+
+.description {
+  flex-grow: 1;
+}
+
+.price {
+  font-weight: bold;
+  font-size: 18px;
+  color: #007bff;
+}
+
+.message-form {
+  display: flex;
+  margin-top: 15px;
+}
+
+.message-form input {
+  flex-grow: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+}
+
+.message-form button {
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 20px;
+}
+
+@media (max-width: 768px) {
+  .listing-card {
     flex-direction: column;
-    justify-content: space-between;
-    padding: 1rem;
-    flex-grow: 1;
   }
-  
-  .card h2 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
+
+  .listing-image {
+    width: 100%;
+    height: auto;
   }
-  
-  .card p {
-    margin-bottom: 0.5rem;
-  }
-  
-  .card .description {
-    margin-bottom: 1rem;
-  }
-  
-  .card .price {
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-  }
-  
-  .card button {
-    align-self: flex-start;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-  
-  .card button:hover {
-    background-color: #0056b3;
-  }
-  
-  .card a {
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  .card a:hover {
-    text-decoration: underline;
-  }
+}

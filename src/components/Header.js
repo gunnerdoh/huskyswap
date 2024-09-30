@@ -30,18 +30,15 @@ const Header = () => {
         >
           HuskySwap
         </button>
-        <div className="d-none d-md-block">
+        <div className="w-full md:w-auto md:flex-grow px-2 py-2 md:py-0">
           <SearchBar />
         </div>
         <div className="d-none d-md-block">
           <HeaderButtons user={user} />
         </div>
         <button className="d-md-none btn btn-light" onClick={toggleMobileMenu}>
-          <img src="/icons/menu-icon.svg" alt="Menu" />
+          <span class="material-symbols-outlined">more_vert</span>        
         </button>
-      </div>
-      <div className="d-md-none">
-        <SearchBar />
       </div>
       <WhyButton />
       {isMobileMenuOpen && <MobileMenu user={user} onClose={toggleMobileMenu} />}
