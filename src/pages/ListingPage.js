@@ -77,7 +77,7 @@ const ListingDetail = () => {
         const conversationDoc = await getDoc(conversationRef);
         const conversationData = conversationDoc.data();
         const newMessage = {
-          content: `Hi, I'm interested in your listing: ${listing.title}. ${message}`,
+          content: `* This message is about: ${listing.title} * : ${message}`,
           timestamp: serverTimestamp(),
           senderId: user.uid
         };

@@ -127,8 +127,13 @@ const UploadForm = () => {
             </div>
           </div>
         </div>
-        <div>
-          <p><bold>Notes on uploading:</bold></p>
+        <div className="tips d-flex flex-column pt-3">
+          <p><strong>Notes on uploading:</strong></p>
+          <p>
+            Huskyswap (currently) only supports single images, so do your best to completely and accurately
+            describe the item you're posting in the title and description, including (if applicable) <strong>size</strong>,
+            <strong> condition</strong>, and anything else you'd want to know if you were looking to buy it.
+          </p>
         </div>
       </div>
     </div>
