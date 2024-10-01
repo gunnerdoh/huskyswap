@@ -42,10 +42,11 @@ const Dashboard = () => {
         {!user && (
           <div className="bg-blue-100 rounded p-4 my-4">
             <p>
-              You're viewing the public dashboard. 
-              <Link to="/login" className="text-blue-600 hover:underline">Log in</Link> or 
-              <Link to="/register" className="text-blue-600 hover:underline">register</Link> 
-              to access your personal dashboard and post listings.
+              You're viewing the public dashboard.{' '}
+              <Link to="/login" className="text-blue-600 hover:underline"> Log in</Link>
+              {' '}or{' '}
+              <Link to="/register" className="text-blue-600 hover:underline"> register</Link>
+              {' '} to access your personal dashboard and post listings.
             </p>
           </div>
         )}
