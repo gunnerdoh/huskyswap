@@ -22,7 +22,7 @@ function App() {
       <Route path="/profile" element={<Profile />} />
       <Route path="/upload" element={<UploadForm />} />
       <Route path="/listing/:id" element={<ListingDetail />} />
-      <Route path="/user/:userId" element={<UserProfile />} />
+      <Route path="/profile/:userId" element={<UserProfile />} />
       <Route path="/messages" element={<ConversationsPage />} />
       <Route path="/messages/:conversationId" element={<ConversationsPage />} />
     </Routes>

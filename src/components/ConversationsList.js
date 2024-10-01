@@ -43,8 +43,8 @@ const ConversationList = () => {
   }, [user]);
 
   return (
-    <div className="ConversationsList container mt-4">
-      <h2 className="mb-4">Your Conversations</h2>
+    <div className="container mt-2">
+      <h2 className="mb-4 pt-1">Your Conversations</h2>
       <div className="list-group">
         {conversations.map(conversation => (
           <Link

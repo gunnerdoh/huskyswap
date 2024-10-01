@@ -4,6 +4,8 @@ import { auth, db } from '../utils/firebaseConfig';
 import { useNavigate, Navigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
+import '../styles/Universal.css';
+
 
 function Login() {
   const [error, setError] = useState('');

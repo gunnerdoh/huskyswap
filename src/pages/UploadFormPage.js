@@ -6,6 +6,7 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useAuth } from '../contexts/AuthContext';
 import Header from '../components/Header';
 import '../styles/Universal.css';
+import '../styles/UploadListing.css';
 
 const UploadForm = () => {
   const [title, setTitle] = useState('');
@@ -82,98 +83,56 @@ const UploadForm = () => {
     }
   };
 
-  // Rest of the component remains the same...
-
   return (
     <div>
       <Header />
-      <div style={styles.container}>
-        <h2 style={styles.title}>Upload New Listing</h2>
-        <form onSubmit={handleSubmit} style={styles.form}>
-          <input
-            type="text"
-            placeholder="Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            style={styles.input}
-            required
-          />
-          <textarea
-            placeholder="Description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            style={styles.textarea}
-            required
-          />
-          <input
-            type="number"
-            placeholder="Price"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            style={styles.input}
-            required
-          />
-          <input
-            type="file"
-            onChange={handleImageChange}
-            style={styles.fileInput}
-            required
-          />
-          {error && <p style={styles.error}>{error}</p>}
-          <button type="submit" style={styles.button}>Upload Listing</button>
-        </form>
+      <div className="upload-bg">
+        <div className="upload-section d-flex flex-direction-row justify-content-center pt-4">
+          <div className="upload-container">
+            <h2 className="upload-title">Upload New Listing</h2>
+            <form onSubmit={handleSubmit} className="upload-form">
+              <input
+                type="text"
+                placeholder="Title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                className="upload-input"
+                required
+              />
+              <textarea
+                placeholder="Description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                className="upload-textarea"
+                required
+              />
+              <input
+                type="number"
+                placeholder="Price"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                className="upload-input"
+                required
+              />
+              <input
+                type="file"
+                onChange={handleImageChange}
+                className="upload-file-input"
+                required
+              />
+              {error && <p className="upload-error">{error}</p>}
+              <button type="submit" className="upload-button">Upload Listing</button>
+            </form>
+            <div className="tips">
+            </div>
+          </div>
+        </div>
+        <div>
+          <p><bold>Notes on uploading:</bold></p>
+        </div>
       </div>
     </div>
   );
-};
-
-// styles object remains unchanged
-
-const styles = {
-  container: {
-    maxWidth: '500px',
-    margin: '0 auto',
-    padding: '20px',
-    backgroundColor: '#f5f5f5',
-    borderRadius: '8px',
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-  },
-  title: {
-    textAlign: 'center',
-    marginBottom: '20px',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  input: {
-    marginBottom: '10px',
-    padding: '10px',
-    borderRadius: '4px',
-    border: '1px solid #ddd',
-  },
-  textarea: {
-    marginBottom: '10px',
-    padding: '10px',
-    borderRadius: '4px',
-    border: '1px solid #ddd',
-    minHeight: '100px',
-  },
-  fileInput: {
-    marginBottom: '10px',
-  },
-  button: {
-    padding: '10px',
-    backgroundColor: '#4CAF50',
-    color: 'white',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
-  },
-  error: {
-    color: 'red',
-    marginBottom: '10px',
-  },
 };
 
 export default UploadForm;

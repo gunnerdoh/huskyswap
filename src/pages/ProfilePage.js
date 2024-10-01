@@ -91,7 +91,7 @@ const Profile = () => {
   return (
     <div>
       <Header />
-      <div className="container">
+      <div className="profile-content py-5 d-flex flex-column align-items-center justify-content-center">
         {userData ? (
           <>
             <div className="profileSection">
@@ -116,7 +116,7 @@ const Profile = () => {
                 )}
               </div>
             </div>
-            <div className="MessagesSection">
+            <div className="messagesSection">
               < ConversationsList />
             </div>
           </>

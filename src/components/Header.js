@@ -23,20 +23,20 @@ const Header = () => {
 
   return (
     <header>
-      <div className="d-flex justify-content-between align-items-center py-2 px-4 border-bottom bg-light">
+      <div className="d-flex justify-content-between align-items-start py-2 px-4 border-bottom bg-light">
         <button
           onClick={handleToDashboard}
-          className="btn btn-link text-decoration-none p-0"
+          className="btn btn-link text-decoration-none p-0 mt-2"
         >
           HuskySwap
         </button>
-        <div className="w-full md:w-auto md:flex-grow px-2 py-2 md:py-0">
+        <div className="w-full md:flex-grow px-2 py-2 md:py-0">
           <SearchBar />
         </div>
         <div className="d-none d-md-block">
           <HeaderButtons user={user} />
         </div>
-        <button className="d-md-none btn btn-light" onClick={toggleMobileMenu}>
+        <button className="d-md-none btn btn-light p-1 pt-2 pe-0" onClick={toggleMobileMenu}>
           <span class="material-symbols-outlined">more_vert</span>        
         </button>
       </div>

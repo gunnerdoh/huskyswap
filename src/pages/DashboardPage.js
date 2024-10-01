@@ -49,7 +49,7 @@ const Dashboard = () => {
             </p>
           </div>
         )}
-        <h2 className="text-xl font-semibold mt-4 mx-5">
+        <h2 className="text-xl font-semibold mt-4 mx-4">
           Available Listings
         </h2>
         <div className="listing-section">
