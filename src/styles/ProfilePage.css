@@ -22,7 +22,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
     padding: 20px;
-    overflow: hidden; /* Prevent content from overflowing */
+    overflow: hidden;
 }
 
 .messagesSection {
@@ -84,12 +84,15 @@ input {
 }
 
 .listingsContainer {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 15px;
     padding: 15px;
     width: 100%;
     box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 .placeholderText {
