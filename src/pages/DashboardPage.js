@@ -64,6 +64,9 @@ const Dashboard = () => {
           )}
         </div>
       </div>
+      <div className="footer p-2">
+        Created by Gunner Dohrenwend. You can email me at gvd@uw.edu
+      </div>
     </div>
   );
 };

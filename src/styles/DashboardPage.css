@@ -9,3 +9,9 @@
 .listing-container {
     max-width: 300px;
 }
+
+.footer {
+    background-color: #f0f0f0;
+    color: black;
+    border-top: 1px solid black;
+}

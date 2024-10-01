@@ -9,6 +9,7 @@ import ListingDetail from './pages/ListingPage';
 import UserProfile from './pages/OtherUserPage';
 import ConversationsPage from './pages/ConversationsPage';
 import AboutPage from './pages/AboutPage';
+import HowToUsePage from './pages/HowToUse';
 
 function App() {
   console.log("app.js executed");
@@ -25,6 +26,7 @@ function App() {
       <Route path="/profile/:userId" element={<UserProfile />} />
       <Route path="/messages" element={<ConversationsPage />} />
       <Route path="/messages/:conversationId" element={<ConversationsPage />} />
+      <Route path="/how-to-use" element={<HowToUsePage />} />
     </Routes>
   );
 }

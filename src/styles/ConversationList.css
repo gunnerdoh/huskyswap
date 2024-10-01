@@ -1,67 +1,92 @@
 .conversation-list {
-    background-color: #505d71;
-    color: #fff;
-    height: 100%;
-  }
-  
+  background-color: #505d71;
+  color: #fff;
+  height: 100%;
+}
+
+.conversation-list h2 {
+  padding: 15px;
+  margin: 0;
+  font-size: 18px;
+  border-bottom: 1px solid #586476;
+}
+
+.conversation-list ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.conversation-list li {
+  border-bottom: 1px solid #586476;
+}
+
+.conversation-list li a {
+  text-decoration: none;
+  color: #bcc3d0;
+  display: block;
+  transition: background-color 0.2s;
+}
+
+.conversation-list li a:hover {
+  background-color: #445166;
+}
+
+.conversation-item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #82cf85;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-right: 15px;
+}
+
+.conversation-details h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.conversation-details p {
+  margin: 5px 0 0;
+  font-size: 14px;
+  color: #8391a1;
+}
+
+.no-conversations {
+  padding: 15px;
+  color: #8391a1;
+}
+
+@media (max-width: 768px) {
   .conversation-list h2 {
-    padding: 15px;
-    margin: 0;
-    font-size: 18px;
-    border-bottom: 1px solid #586476;
-  }
-  
-  .conversation-list ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .conversation-list li {
-    border-bottom: 1px solid #586476;
-  }
-  
-  .conversation-list li a {
-    text-decoration: none;
-    color: #bcc3d0;
-    display: block;
-    transition: background-color 0.2s;
-  }
-  
-  .conversation-list li a:hover {
-    background-color: #445166;
-  }
-  
-  .conversation-item {
-    display: flex;
-    align-items: center;
-    padding: 15px;
-  }
-  
-  .user-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #82cf85;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    margin-right: 15px;
-  }
-  
-  .conversation-details h3 {
-    margin: 0;
     font-size: 16px;
+    padding: 10px;
   }
-  
-  .conversation-details p {
-    margin: 5px 0 0;
+
+  .conversation-item {
+    padding: 10px;
+  }
+
+  .user-avatar {
+    width: 30px;
+    height: 30px;
     font-size: 14px;
-    color: #8391a1;
   }
-  
-  .no-conversations {
-    padding: 15px;
-    color: #8391a1;
+
+  .conversation-details h3 {
+    font-size: 14px;
   }
+
+  .conversation-details p {
+    font-size: 12px;
+  }
+}

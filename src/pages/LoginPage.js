@@ -51,7 +51,7 @@ function Login() {
       // Navigation is handled by the useEffect hook
     } catch (err) {
       console.error('Error during Google sign-in:', err);
-      setError('Failed to login with Google. Please try again.');
+      setError('Failed to log in with Google. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -78,7 +78,7 @@ function Login() {
           className="btn btn-danger mb-2" 
           disabled={loading}
         >
-          {loading ? 'Logging in...' : 'Login with Google'}
+          {loading ? 'Logging in...' : 'Log in with Google'}
         </button>
         {error && <p className="text-danger mb-2">{error}</p>}
       </div>
