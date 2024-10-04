@@ -9,3 +9,7 @@
     max-height: 50px; /* Adjust as needed */
     opacity: 1;
   }
+
+  .button-addon2-mobile {
+    width: 30px;
+  }

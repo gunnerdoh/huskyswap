@@ -192,6 +192,7 @@ const ListingDetail = () => {
                     <div className="owner-buttons">
                       <button onClick={handleEdit} className="edit-button">Edit Listing</button>
                       <button onClick={handleDelete} className="delete-button">Delete Listing</button>
+                      <Link to="/" className="back-button">Back to Home</Link>
                     </div>
                   )}
                 </div>
@@ -208,7 +209,12 @@ const ListingDetail = () => {
                     />
                     <button type="submit">Send</button>
                   </form>
+
+                  <div className="back-button-container mt-3 mb-0">
+                      <Link to="/" className="back-button">Back to Home</Link>
+                  </div>
                 </div>
+                
               )
             )}
           </div>

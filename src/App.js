@@ -12,12 +12,12 @@ import AboutPage from './pages/AboutPage';
 import HowToUsePage from './pages/HowToUse';
 
 function App() {
-  console.log("app.js executed");
   return (
     <Routes>
       <Route path="/" element={<Dashboard />} />
-      <Route path="/about" element={<AboutPage />} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/search/:searchQuery" element={<Dashboard />} />
+      <Route path="/about" element={<AboutPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<Register />} />
       <Route path="/profile" element={<Profile />} />
