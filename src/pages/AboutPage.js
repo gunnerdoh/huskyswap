@@ -12,7 +12,7 @@ const About = () => {
       <div className="about-content">
         <h1>So What is This?</h1>
         <p className="summary-top">
-            HuskySwap is an online platform for UW students to post items
+            Huskyswap is an online platform for UW students to post items
             they'd like to sell, find items they want, and connect to exchange.
         </p>
         <h2>Why I Made it</h2>
@@ -37,7 +37,7 @@ const About = () => {
             wardrobe revamp leave you a pile of clothes that you're probably not gonna wear out again? 
             Don't want to pay ten dollars to ship your twelve dollar t-shirt to a person in Arizona?
         </p>
-        <p className="call">Throw it on HuskySwap!</p>
+        <p className="call">Throw it on Huskyswap!</p>
         <h2>What makes this different than other online marketplaces?</h2>
         <ul>
           <li>Smaller user base - Posts are more relevant to UW Students and their needs</li>
