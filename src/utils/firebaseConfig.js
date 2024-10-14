@@ -9,7 +9,7 @@ import { getStorage } from 'firebase/storage';
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyAwtu8gPlyVeNuScupS4ZWmgYYfe40x7ns",
-  authDomain: "Huskyswap",
+  authDomain: "huskyswap-237c0.firebaseapp.com",
   projectId: "huskyswap-237c0",
   storageBucket: "huskyswap-237c0.appspot.com",
   messagingSenderId: "493294037363",

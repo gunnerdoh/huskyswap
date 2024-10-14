@@ -4,7 +4,6 @@ import Header from '../components/Header';
 import '../styles/AboutPage.css';
 import '../styles/Universal.css';
 
-
 const About = () => {
   return (
     <div className="about-container">
@@ -44,7 +43,7 @@ const About = () => {
           <li>Local - Everyone's on/around campus, can meet up to exchange goods</li>
           <li>User autonomy - let the buyer and seller figure out how to safely and successfully make exchanges</li>
           <li>No buyer / seller fees!</li>
-        </ul>        
+        </ul>
         <h2>Contact</h2>
         <p>
           If you have any questions or feedback, reach out at {' '}
